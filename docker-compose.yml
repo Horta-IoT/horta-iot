@@ -1,0 +1,18 @@
+version: '2'
+services:
+    mosquitto:
+        image: eclipse-mosquitto
+        ports:
+            - 1883:1883
+            - 8883:8883
+            - 9002:9001
+        volumes:
+            - ./mosquitto:/mosquitto
+    client-pub:
+        build: ./client-pub
+        links:
+            - mosquitto
+    client-sub:
+        build: ./client-sub
+        links:
+            - mosquitto
